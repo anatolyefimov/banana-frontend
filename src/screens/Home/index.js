@@ -7,7 +7,7 @@ export default function Home({navigation}) {
             <Text>Home Screen</Text>
             <Button
                 title="Go to Details"
-                onPress={() => navigation.navigate('Details')}
+                onPress={() => navigation.navigate('Login')}
             />
         </View>
     );

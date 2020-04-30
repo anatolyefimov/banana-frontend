@@ -8,7 +8,8 @@ export default function Input({value, style, onChangeText, ...props}) {
         style={{
             borderColor: 'gray',
             borderWidth: 1,
-            borderRadius: 3,
+            borderRadius: 5,
+            padding: 10,
             ...style
         }}
         onChangeText={onChangeText}
