@@ -7,10 +7,9 @@ import Button from '@/components/Button'
 
 import style from './style.js'
 
-export default function Login({ navigation }) {
+export default function Registration({ navigation }) {
     const [login, loginSet] = useState('');
     const [password, passwordSet] = useState('');
-
     return (
         <View style={style.container}>
 
@@ -33,18 +32,18 @@ export default function Login({ navigation }) {
                 />
 
                 <Button 
-                    text="Sign in"  
+                    text="Sign up"  
                     style={style.form__button}
                 />
             </View>
             <Button
-                text = 'Go to the Registration'
+                text = 'Go to the Login Page'
                 style={{
                     backgroundColor: 'none',
                     color: 'dodgerblue',
                     marginTop: 10
                 }}
-                onPress={() => navigation.navigate('Registration')} 
+                onPress={() => navigation.navigate('Login')} 
             />
         </View>
     );
