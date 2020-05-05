@@ -1,26 +1,56 @@
-import React from 'react';
-import { Provider } from 'react-redux'
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { View, Text, AsyncStorage} from 'react-native'
 
-import store from '@/redux/store'
+import { setAccessToken } from '@/redux/actions'
 
 import Registration from '@/screens/Registration'
 import Login from '@/screens/Login'
 
 const Stack = createStackNavigator();
 
-export default function Root() {
+function Root({ dispatch, accessToken }) {
+
+    useEffect(() => {
+        const fetchToken = async () => {
+            let token
+            try {
+                token = await AsyncStorage.getItem('accessToken');
+            }
+            catch (error) {
+                console.error(error)
+            }
+            dispatch(setAccessToken(token))
+        };
+
+        fetchToken();
+    });
+
     return (
-        <Provider store={store}>
-            <NavigationContainer>
-                <Stack.Navigator screenOptions={{ headerShown: false}}>
+  
+        <NavigationContainer>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+                {accessToken ? (
+                    <Stack.Screen name="Login" component={Login} />
+                ) : (
                     <Stack.Screen name="Registration" component={Registration} />
-                    <Stack.Screen name="Login" component={Login}/>
-                </Stack.Navigator>
-            </NavigationContainer>
-        </Provider>
+                )}
+            </Stack.Navigator>
+        </NavigationContainer> 
     )
 }
+
+const mapStateToProps = (state) => ({
+    accessToken: state.accessToken
+})
+
+export default connect(mapStateToProps)(Root);
+
+
+
+
+
 
 
