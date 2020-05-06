@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, AsyncStorage} from 'react-native'
+import { AsyncStorage } from 'react-native'
 
 import { setAccessToken } from '@/redux/actions'
 
-import Registration from '@/screens/Registration'
+import User from '@/screens/User'
 import Login from '@/screens/Login'
 
 const Stack = createStackNavigator();
@@ -33,9 +33,9 @@ function Root({ dispatch, accessToken }) {
         <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 {accessToken ? (
-                    <Stack.Screen name="Login" component={Login} />
+                    <Stack.Screen name="User" component={User} />
                 ) : (
-                    <Stack.Screen name="Registration" component={Registration} />
+                    <Stack.Screen name="Login" component={Login} />
                 )}
             </Stack.Navigator>
         </NavigationContainer> 

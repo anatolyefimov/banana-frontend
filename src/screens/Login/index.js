@@ -1,26 +1,51 @@
 import React from 'react';
 import { useState } from 'react';
-import { View} from 'react-native'
+import { View, Text, AsyncStorage } from 'react-native'
+import { connect } from 'react-redux'
 
 import Input from '@/components/Input'
 import Button from '@/components/Button'
+import login from '@/api/login.js'
+import {setAccessToken} from '@/redux/actions'
 
 import style from './style.js'
 
-export default function Login({ navigation }) {
-    const [login, loginSet] = useState('');
-    const [password, passwordSet] = useState('');
+function Login({ navigation, dispatch }) {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [credentialsValid, setCredentialsValid] = useState(true);
+
+    const onSignIn = async () => {
+        let accessToken = await login({
+            username,
+            password
+        })
+        
+        if (accessToken) {
+            setCredentialsValid(true)
+            try {
+                await AsyncStorage.setItem('accessToken', accessToken)
+                console.log('login set tolen!')
+                dispatch(setAccessToken(accessToken))
+            }
+            catch(e) {
+                console.log(e)
+            }
+        } else {
+            setCredentialsValid(false)
+        }
+    }
 
     return (
         <View style={style.container}>
 
             <View style={style.form}>
                 <Input 
-                    value={login}
+                    value={username}
                     style={style.form__input} 
                     placeholder='Логин' 
                     textContentType='username'
-                    onChangeText={text => { loginSet(text) }}
+                    onChangeText={text => { setUsername(text) }}
                  />
                    
                 <Input 
@@ -29,13 +54,16 @@ export default function Login({ navigation }) {
                     placeholder='Пароль' 
                     textContentType='password' 
                     secureTextEntry={true}
-                    onChangeText={text => { passwordSet(text) }}
+                    onChangeText={text => { setPassword(text) }}
                 />
 
                 <Button 
                     text="Sign in"  
                     style={style.form__button}
+                    onPress={onSignIn}
                 />
+                <Text style = {{color: 'red'}}>{ credentialsValid || 'Invalid username or password' }</Text>
+                
             </View>
             <Button
                 text = 'Go to the Registration'
@@ -49,3 +77,6 @@ export default function Login({ navigation }) {
         </View>
     );
 }
+
+
+export default connect()(Login);
