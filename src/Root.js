@@ -7,6 +7,7 @@ import { AsyncStorage } from 'react-native'
 import { setAccessToken } from '@/redux/actions'
 
 import User from '@/screens/User'
+import Registration from '@/screens/Registration'
 import Login from '@/screens/Login'
 
 const Stack = createStackNavigator();
@@ -37,6 +38,7 @@ function Root({ dispatch, accessToken }) {
                 ) : (
                     <Stack.Screen name="Login" component={Login} />
                 )}
+                <Stack.Screen name="Registration" component={Registration}/>
             </Stack.Navigator>
         </NavigationContainer> 
     )
