@@ -72,7 +72,7 @@ function Login({ navigation, dispatch }) {
                     color: 'dodgerblue',
                     marginTop: 10
                 }}
-                onPress={() => navigation.navigate('Registration', {name: 'Registration'})} 
+                onPress={() => navigation.navigate('Registration')} 
             />
         </View>
     );
