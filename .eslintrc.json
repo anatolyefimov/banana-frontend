@@ -38,6 +38,8 @@
         "block-spacing": "error",
         "no-var": "error",
         "keyword-spacing": "error",
+        "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
+        "eol-last": ["error", "always"],
         "react/prop-types": [0]
     }
 }
