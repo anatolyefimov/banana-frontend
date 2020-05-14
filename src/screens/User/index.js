@@ -8,7 +8,7 @@ import Button from '@/components/Button'
 
 function User({ accessToken, dispatch, userData }) {
     useEffect(() => {
-        if (Object.keys(userData).length === 0) {
+        if (Object.keys(userData).length === 0 && accessToken) {
             getUserData(accessToken)
                 .then( data => { dispatch(setUserData(data))} )
         }
@@ -27,7 +27,11 @@ function User({ accessToken, dispatch, userData }) {
             </Text>
             <Button 
                 text='Log out'
-                onPress={async () => {await AsyncStorage.removeItem('accessToken'), dispatch(setAccessToken(''))}}>
+                onPress={async () => {
+                    await AsyncStorage.removeItem('accessToken'); 
+                    dispatch(setAccessToken(null))
+                    dispatch(setUserData({}))
+                }}>
 
             </Button>
         </View>

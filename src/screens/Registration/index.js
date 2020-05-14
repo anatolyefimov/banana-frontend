@@ -1,25 +1,27 @@
 import React from 'react';
 import { useState } from 'react';
-import { View} from 'react-native'
+import { View, Text } from 'react-native'
 
 import Input from '@/components/Input'
 import Button from '@/components/Button'
+import register from '@/api/register.js'
 
 import style from './style.js'
 
 export default function Registration({ navigation }) {
-    const [login, loginSet] = useState('');
+    const [username, usernameSet] = useState('');
     const [password, passwordSet] = useState('');
+    const [usernameTaken, setUsernameTaken] = useState(false);
+
     return (
         <View style={style.container}>
-
             <View style={style.form}>
                 <Input 
-                    value={login}
+                    value={username}
                     style={style.form__input} 
                     placeholder='Логин' 
                     textContentType='username'
-                    onChangeText={text => { loginSet(text) }}
+                    onChangeText={text => { usernameSet(text) }}
                  />
                    
                 <Input 
@@ -34,7 +36,19 @@ export default function Registration({ navigation }) {
                 <Button 
                     text="Sign up"  
                     style={style.form__button}
+                    onPress = {() => {
+                        register({ username, password })
+                            .then((res) => {
+                                setUsernameTaken(false);
+                                if (res.status === 409) {
+                                    setUsernameTaken(true);
+                                } else {
+                                    navigation.navigate('Login')
+                                }
+                            })
+                    }}
                 />
+                <Text style = {{color: 'red'}}>{ !usernameTaken || 'This username already taken' }</Text>
             </View>
             <Button
                 text = 'Go to the Login Page'

@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Text } from 'react-native';
 
 import { setAccessToken } from '@/redux/actions';
 
 import User from '@/screens/User';
 import Registration from '@/screens/Registration';
 import Login from '@/screens/Login';
+import { set } from 'react-native-reanimated';
 
 const Stack = createStackNavigator();
 
 function Root({ dispatch, accessToken }) {
-
+    const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
         const fetchToken = async () => {
             let token;
@@ -23,16 +24,23 @@ function Root({ dispatch, accessToken }) {
             catch (error) {
                 console.error(error);
             }
-            dispatch(setAccessToken(token));
+            if (accessToken === '') {
+                dispatch(setAccessToken(token));
+                // setIsLoaded(true);
+                
+            }
+            
         };
 
         fetchToken();
     });
-
+    console.log(isLoaded)
+    // if (!isLoaded) {
+    //     return <Text>Loading...</Text>
+    // }
     return (
-
-        <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <NavigationContainer> 
+            <Stack.Navigator screenOptions={{ headerShown: false }}> 
                 {accessToken ? (
                     <Stack.Screen name="User" component={User} />
                 ) : (
