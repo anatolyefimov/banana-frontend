@@ -25,7 +25,6 @@ function Login({ navigation, dispatch }) {
             setCredentialsValid(true)
             try {
                 await AsyncStorage.setItem('accessToken', accessToken)
-                console.log('login set tolen!')
                 dispatch(setAccessToken(accessToken))
             }
             catch(e) {
