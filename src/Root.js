@@ -45,7 +45,7 @@ function Root({dispatch, accessToken}) {
         return <Loading/>;
     }
 
-    function ProfileScreen() {
+    function Profile() {
         return (
             <Stack.Navigator screenOptions={{headerShown: false}}>
                 {accessToken ? (
@@ -62,7 +62,7 @@ function Root({dispatch, accessToken}) {
     return (
         <Tab.Navigator
             screenOptions={({route}) => ({
-                // eslint-disable-next-line react/display-name
+
                 tabBarIcon: ({color, size}) => {
                     let iconName;
 
@@ -87,7 +87,7 @@ function Root({dispatch, accessToken}) {
             <Tab.Screen name="Главная" component={MainScreen}/>
             <Tab.Screen name="Каталог" component={Catalog}/>
             <Tab.Screen name="Корзина" component={Basket}/>
-            <Tab.Screen name="Профиль" component={ProfileScreen}/>
+            <Tab.Screen name="Профиль" component={Profile}/>
         </Tab.Navigator>
     );
 
