@@ -5,8 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "npx eslint src/*.js",
-    "lint:fix": "npx eslint src/*.js --fix",
+    "lint": "npx eslint --ext .js src/ App.js",
+    "lint:fix": "npx eslint --ext .js src/ App.js --fix",
     "eject": "expo eject",
     "debug": "open 'rndebugger://set-debugger-loc?host=localhost&port=8081'"
   },

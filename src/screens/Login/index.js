@@ -1,14 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
-import { View, Text, AsyncStorage } from 'react-native'
-import { connect } from 'react-redux'
+import { View, Text, AsyncStorage } from 'react-native';
+import { connect } from 'react-redux';
 
-import Input from '@/components/Input'
-import Button from '@/components/Button'
-import login from '@/api/login.js'
-import {setAccessToken} from '@/redux/actions'
+import Input from '@/components/Input';
+import Button from '@/components/Button';
+import login from '@/api/login.js';
+import {setAccessToken} from '@/redux/actions';
 
-import style from './style.js'
+import style from './style.js';
 
 function Login({ navigation, dispatch }) {
     const [username, setUsername] = useState('');
@@ -19,50 +19,50 @@ function Login({ navigation, dispatch }) {
         let accessToken = await login({
             username,
             password
-        })
-        
+        });
+
         if (accessToken) {
-            setCredentialsValid(true)
+            setCredentialsValid(true);
             try {
-                await AsyncStorage.setItem('accessToken', accessToken)
-                dispatch(setAccessToken(accessToken))
+                await AsyncStorage.setItem('accessToken', accessToken);
+                dispatch(setAccessToken(accessToken));
             }
-            catch(e) {
-                console.log(e)
+            catch (e) {
+                console.log(e);
             }
         } else {
-            setCredentialsValid(false)
+            setCredentialsValid(false);
         }
-    }
+    };
 
     return (
         <View style={style.container}>
 
             <View style={style.form}>
-                <Input 
+                <Input
                     value={username}
-                    style={style.form__input} 
-                    placeholder='Логин' 
+                    style={style.form__input}
+                    placeholder='Логин'
                     textContentType='username'
-                    onChangeText={text => { setUsername(text) }}
-                 />
-                   
-                <Input 
-                    value={password}
-                    style={style.form__input} 
-                    placeholder='Пароль' 
-                    textContentType='password' 
-                    secureTextEntry={true}
-                    onChangeText={text => { setPassword(text) }}
+                    onChangeText={text => { setUsername(text); }}
                 />
 
-                <Button 
-                    text="Sign in"  
+                <Input
+                    value={password}
+                    style={style.form__input}
+                    placeholder='Пароль'
+                    textContentType='password'
+                    secureTextEntry={true}
+                    onChangeText={text => { setPassword(text); }}
+                />
+
+                <Button
+                    text="Sign in"
                     style={style.form__button}
                     onPress={onSignIn}
                 />
                 <Text style = {{color: 'red'}}>{ credentialsValid || 'Invalid username or password' }</Text>
-                
+
             </View>
             <Button
                 text = 'Go to the Registration'
@@ -71,7 +71,7 @@ function Login({ navigation, dispatch }) {
                     color: 'dodgerblue',
                     marginTop: 10
                 }}
-                onPress={() => navigation.navigate('Registration')} 
+                onPress={() => navigation.navigate('Registration')}
             />
         </View>
     );

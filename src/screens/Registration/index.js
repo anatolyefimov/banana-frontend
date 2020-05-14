@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-import { View, Text } from 'react-native'
+import { View, Text } from 'react-native';
 
-import Input from '@/components/Input'
-import Button from '@/components/Button'
-import register from '@/api/register.js'
+import Input from '@/components/Input';
+import Button from '@/components/Button';
+import register from '@/api/register.js';
 
-import style from './style.js'
+import style from './style.js';
 
 export default function Registration({ navigation }) {
     const [username, usernameSet] = useState('');
@@ -16,25 +16,25 @@ export default function Registration({ navigation }) {
     return (
         <View style={style.container}>
             <View style={style.form}>
-                <Input 
+                <Input
                     value={username}
-                    style={style.form__input} 
-                    placeholder='Логин' 
+                    style={style.form__input}
+                    placeholder='Логин'
                     textContentType='username'
-                    onChangeText={text => { usernameSet(text) }}
-                 />
-                   
-                <Input 
-                    value={password}
-                    style={style.form__input} 
-                    placeholder='Пароль' 
-                    textContentType='password' 
-                    secureTextEntry={true}
-                    onChangeText={text => { passwordSet(text) }}
+                    onChangeText={text => { usernameSet(text); }}
                 />
 
-                <Button 
-                    text="Sign up"  
+                <Input
+                    value={password}
+                    style={style.form__input}
+                    placeholder='Пароль'
+                    textContentType='password'
+                    secureTextEntry={true}
+                    onChangeText={text => { passwordSet(text); }}
+                />
+
+                <Button
+                    text="Sign up"
                     style={style.form__button}
                     onPress = {() => {
                         register({ username, password })
@@ -43,9 +43,9 @@ export default function Registration({ navigation }) {
                                 if (res.status === 409) {
                                     setUsernameTaken(true);
                                 } else {
-                                    navigation.navigate('Login')
+                                    navigation.navigate('Login');
                                 }
-                            })
+                            });
                     }}
                 />
                 <Text style = {{color: 'red'}}>{ !usernameTaken || 'This username already taken' }</Text>
@@ -57,7 +57,7 @@ export default function Registration({ navigation }) {
                     color: 'dodgerblue',
                     marginTop: 10
                 }}
-                onPress={() => navigation.navigate('Login')} 
+                onPress={() => navigation.navigate('Login')}
             />
         </View>
     );

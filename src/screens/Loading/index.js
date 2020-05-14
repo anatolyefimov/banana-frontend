@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text} from 'react-native'
+import { View, Text} from 'react-native';
 
 function Loading() {
     return (
@@ -10,7 +10,7 @@ function Loading() {
         }}>
             <Text>Loading...</Text>
         </View>
-    )
+    );
 }
 
 export default Loading;

@@ -1,14 +1,14 @@
-import { createStore } from 'redux'
+import { createStore } from 'redux';
 
-import rootReducer from 'redux/reducers'
+import rootReducer from 'redux/reducers';
 
 const store = createStore(
-    rootReducer, 
+    rootReducer,
     {
-        accessToken : '', 
+        accessToken : '',
         userData: {}
-    },   
+    },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+);
 
 export default store;

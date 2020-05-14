@@ -1,5 +1,5 @@
-import React from "react";
-import { Text, TouchableOpacity, StyleSheet} from "react-native";
+import React from 'react';
+import { Text, TouchableOpacity} from 'react-native';
 
 export default function Button({style, text, onPress, ...props}) {
     const textColor = style ? style.color : 'white';
@@ -8,13 +8,13 @@ export default function Button({style, text, onPress, ...props}) {
             style={{
                 backgroundColor: 'blue',
                 padding: 10,
-                borderRadius: 5, 
+                borderRadius: 5,
                 ...style
             }}
             onPress={onPress}
             {...props}
         >
-            <Text 
+            <Text
                 style={{
                     color: textColor,
                     fontSize: 20,
@@ -25,4 +25,4 @@ export default function Button({style, text, onPress, ...props}) {
             </Text>
         </TouchableOpacity>
     );
-};
+}

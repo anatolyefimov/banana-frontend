@@ -9,14 +9,14 @@ async function login(data) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-        })
-         
-        res = await res.json()
+        });
+
+        res = await res.json();
 
         return res.access_token;
     }
     catch (e) {
-        console.error(e)
+        console.error(e);
     }
 
 

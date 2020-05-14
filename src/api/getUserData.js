@@ -10,10 +10,10 @@ async function getUserData(accessToken) {
         body: JSON.stringify({
             accessToken
         })
-    })
+    });
 
-    res = await res.json()
-   
+    res = await res.json();
+
     return res;
 }
 

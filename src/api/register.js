@@ -7,11 +7,11 @@ async function register(data) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-    })
+    });
 
     const status = res.status;
-    
-    res = await res.json()
+
+    res = await res.json();
     res.status = status;
 
     return res;
