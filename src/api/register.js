@@ -1,5 +1,7 @@
+import Constants from 'expo-constants';
+
 async function register(data) {
-    let res = await fetch('/register', {
+    let res = await fetch(`${Constants.manifest.extra.host}/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

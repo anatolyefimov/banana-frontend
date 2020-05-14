@@ -12,9 +12,8 @@ async function getUserData(accessToken) {
         })
     })
 
-    
     res = await res.json()
-
+   
     return res;
 }
 
