@@ -15,7 +15,7 @@ import MainScreen from '@/screens/Main';
 import Catalog from '@/screens/Catalog';
 import Basket from '@/screens/Basket';
 
-import { Ionicons } from '@expo/vector-icons';
+import {Ionicons} from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -61,8 +61,8 @@ function Root({dispatch, accessToken}) {
 
     return (
         <Tab.Navigator
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
+            screenOptions={({route}) => ({
+                tabBarIcon: ({color, size}) => {
                     let iconName;
 
                     if (route.name === 'Главная') {
@@ -75,7 +75,7 @@ function Root({dispatch, accessToken}) {
                         iconName = 'ios-person';
                     }
 
-                    return <Ionicons name={iconName} size={size} color={color} />;
+                    return <Ionicons name={iconName} size={size} color={color}/>;
                 },
             })}
             tabBarOptions={{
