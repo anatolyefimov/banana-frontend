@@ -62,6 +62,7 @@ function Root({dispatch, accessToken}) {
     return (
         <Tab.Navigator
             screenOptions={({route}) => ({
+                // eslint-disable-next-line react/display-name
                 tabBarIcon: ({color, size}) => {
                     let iconName;
 
