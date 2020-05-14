@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { NavigationContainer } from '@react-navigation/native';
+
 import { createStackNavigator } from '@react-navigation/stack';
-import { AsyncStorage, Text } from 'react-native';
+import { AsyncStorage } from 'react-native';
 
 import { setAccessToken } from '@/redux/actions';
 
 import User from '@/screens/User';
 import Registration from '@/screens/Registration';
 import Login from '@/screens/Login';
-import { set } from 'react-native-reanimated';
+import Loading from '@/screens/Loading';
+
 
 const Stack = createStackNavigator();
 
@@ -26,29 +27,27 @@ function Root({ dispatch, accessToken }) {
             }
             if (accessToken === '') {
                 dispatch(setAccessToken(token));
-                // setIsLoaded(true);
-                
+                setIsLoaded(true);
+
             }
-            
+
         };
 
         fetchToken();
     });
-    console.log(isLoaded)
-    // if (!isLoaded) {
-    //     return <Text>Loading...</Text>
-    // }
+
+    if (!isLoaded) {
+        return <Loading />;
+    }
     return (
-        <NavigationContainer> 
-            <Stack.Navigator screenOptions={{ headerShown: false }}> 
-                {accessToken ? (
-                    <Stack.Screen name="User" component={User} />
-                ) : (
-                    <Stack.Screen name="Login" component={Login} />
-                )}
-                <Stack.Screen name="Registration" component={Registration}/>
-            </Stack.Navigator>
-        </NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            {accessToken ? (
+                <Stack.Screen name="User" component={User} />
+            ) : (
+                <Stack.Screen name="Login" component={Login} />
+            )}
+            <Stack.Screen name="Registration" component={Registration}/>
+        </Stack.Navigator>
     );
 }
 

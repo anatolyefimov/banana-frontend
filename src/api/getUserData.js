@@ -12,9 +12,7 @@ async function getUserData(accessToken) {
         })
     })
 
-    let text = await res.text()
-    console.log(text)
-    res = JSON.parse(text);
+    res = await res.json()
    
     return res;
 }

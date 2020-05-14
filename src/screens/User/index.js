@@ -1,24 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, AsyncStorage } from 'react-native'
 import { connect } from 'react-redux'
 
 import getUserData from '@/api/getUserData.js'
 import { setUserData, setAccessToken } from '@/redux/actions'
 import Button from '@/components/Button'
+import Loading from '@/screens/Loading';
 
 function User({ accessToken, dispatch, userData }) {
+    const [isLoaded, setIsLoaded] = useState(false);
+
     useEffect(() => {
         if (Object.keys(userData).length === 0 && accessToken) {
             getUserData(accessToken)
-                .then( data => { dispatch(setUserData(data))} )
+                .then( data => { 
+                    dispatch(setUserData(data))
+                    setIsLoaded(true);
+                } )
         }
     })
 
-
+    if (!isLoaded) {
+        return <Loading />;
+    }
 
     return (
         <View style={{
-            'flex': 1,
+            flex: 1,
             alignItems: 'center',
             justifyContent: 'center'
         }}>
