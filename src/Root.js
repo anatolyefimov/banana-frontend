@@ -14,6 +14,8 @@ import Loading from '@/screens/Loading';
 import MainScreen from '@/screens/Main';
 import Catalog from '@/screens/Catalog';
 import Basket from '@/screens/Basket';
+import CategoryScreen2 from './screens/Catalog';
+import DetailsScreen from './screens/Details';
 
 import {Ionicons} from '@expo/vector-icons';
 
@@ -58,6 +60,15 @@ function Root({dispatch, accessToken}) {
         );
     }
 
+    function Catalog2() {
+        return (
+            <Stack.Navigator screenOptions={{headerShown: false}}>
+                <Stack.Screen name="Catalog" component={CategoryScreen2}/>
+                <Stack.Screen name="Details" component={DetailsScreen}/>
+            </Stack.Navigator>
+        );
+    }
+
 
     return (
         <Tab.Navigator
@@ -85,7 +96,7 @@ function Root({dispatch, accessToken}) {
             }}
         >
             <Tab.Screen name="Главная" component={MainScreen}/>
-            <Tab.Screen name="Каталог" component={Catalog}/>
+            <Tab.Screen name="Каталог" component={Catalog2}/>
             <Tab.Screen name="Корзина" component={Basket}/>
             <Tab.Screen name="Профиль" component={Profile}/>
         </Tab.Navigator>
