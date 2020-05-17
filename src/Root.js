@@ -12,9 +12,9 @@ import Registration from '@/screens/Registration';
 import Login from '@/screens/Login';
 import Loading from '@/screens/Loading';
 import MainScreen from '@/screens/Main';
-import Catalog from '@/screens/Catalog';
 import Basket from '@/screens/Basket';
 import CategoryScreen2 from './screens/Catalog';
+import WholeCategoryList from './screens/CategoriesList';
 import DetailsScreen from './screens/Details';
 
 import {Ionicons} from '@expo/vector-icons';
@@ -63,6 +63,7 @@ function Root({dispatch, accessToken}) {
     function Catalog2() {
         return (
             <Stack.Navigator screenOptions={{headerShown: false}}>
+                <Stack.Screen name="CategoriesList" component={WholeCategoryList}/>
                 <Stack.Screen name="Catalog" component={CategoryScreen2}/>
                 <Stack.Screen name="Details" component={DetailsScreen}/>
             </Stack.Navigator>

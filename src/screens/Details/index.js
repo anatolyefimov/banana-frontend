@@ -1,57 +1,44 @@
 import * as React from 'react';
-import {View, Text, FlatList, SafeAreaView, StyleSheet, TouchableOpacity, Button, Image} from 'react-native';
-import Constants from 'expo-constants';
+import {Button, Dimensions, Image, ScrollView, Text, View} from 'react-native';
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-//
-// function DetailsScreen() {
-//     return (
-//         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//             <Text>Details Screen</Text>
-//         </View>
-//     );
-// }
+const {width} = Dimensions.get('window');
 
-function DetailsScreen({ route, navigation }) {
+function DetailsScreen({route, navigation}) {
     /* 2. Get the param */
-    const { itemId } = route.params;
-    const { title } = route.params;
-    const { price } = route.params;
-    const { image } = route.params;
-    // const { title } = itemId.title;
-    console.log({itemId});
-    console.log(title);
-    console.log(price);
+    const {itemId} = route.params;
+    const {title} = route.params;
+    const {price} = route.params;
+    const {image} = route.params;
+
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Details Screen</Text>
-            <Text>id: {itemId}</Text>
-            <Text>name: {title}</Text>
-            <Text>price: {price}</Text>
-            <Text>image: {image}</Text>
-            <Image
-                style={styles.tinyLogo}
-                source={{
-                    uri: image,
-                }}
-            />
-            <Button
-                title="Go to Details... again"
-                onPress={() =>
-                    navigation.push('Details', {
-                        itemId: Math.floor(Math.random() * 100),
-                    })
-                }
-            />
-            <Button title="Go back" onPress={() => navigation.goBack()} />
+        <View style={{flex: 1}}>
+            <ScrollView>
+                <View
+                    style={{
+                        width: width,
+                        height: hp('65%')
+                    }}
+                >
+                    <Image
+                        source={{uri: image,}}
+                        style={{
+                            flex: 1,
+                            width: null,
+                            height: null,
+                            resizeMode: 'center'
+                        }}
+                    />
+                </View>
+                <Text>id: {itemId}</Text>
+                <Text>name: {title}</Text>
+                <Text>price: ${price}</Text>
+                <Text>image: {image}</Text>
+                <Button title="Go to list of categories" onPress={() => navigation.navigate('CategoriesList')}/>
+                <Button title="Go back" onPress={() => navigation.goBack()}/>
+            </ScrollView>
         </View>
     );
 }
 
 export default DetailsScreen;
-
-const styles = StyleSheet.create({
-    tinyLogo: {
-        width: 50,
-        height: 50,
-    },
-});
