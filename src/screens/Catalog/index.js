@@ -1,24 +1,24 @@
-import * as React from 'react';
-import {FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import Constants from 'expo-constants';
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
+import React from 'react';
+import {FlatList, Image, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+
+import style from './style.js';
 
 const DATA = [
     {
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item',
+        title: 'Брюки 1',
         price: '14',
         image: 'https://reactnative.dev/img/tiny_logo.png',
     },
     {
         id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-        title: 'Second Item',
+        title: 'Брюки 2',
         price: '14',
         image: 'https://reactnative.dev/img/tiny_logo.png'
     },
     {
         id: '58694a0f-3da1-471f-bd96-145571e29d72',
-        title: 'Third Item',
+        title: 'Брюки 3',
         price: '14',
         image: 'https://reactnative.dev/img/tiny_logo.png',
     },
@@ -46,12 +46,9 @@ const T_SHIRT_DATA = [
 ];
 
 function getDataByCategoryName({categoryName}) {
-    console.log(categoryName);
     if (categoryName === 'Футболки') {
-        console.log('должен нарисовать футболку');
         return T_SHIRT_DATA;
     } else {
-        console.log('хер');
         return DATA;
     }
 }
@@ -59,18 +56,18 @@ function getDataByCategoryName({categoryName}) {
 function Item({item, onPress}) {
 
     return (
-        <View style={styles.container}>
+        <View style={style.container}>
             <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
-                <View style={styles.marginContainer}>
-                    <View style={styles.imageContainer}>
-                        <Image source={{uri: item.image}} style={styles.image}/>
+                <View style={style.container_margin}>
+                    <View style={style.container_image}>
+                        <Image source={{uri: item.image}} style={style.image}/>
                     </View>
                     <View style={{marginHorizontal: 5}}>
-                        <Text style={styles.title}>
+                        <Text style={style.title}>
                             {item.title}
                         </Text>
-                        <View style={styles.priceView}>
-                            <Text style={styles.priceText}>
+                        <View style={style.price_view}>
+                            <Text style={style.price_text}>
                                 ${item.price}
                             </Text>
                         </View>
@@ -97,11 +94,10 @@ function renderItem({item, navigation}) {
     );
 }
 
-function CategoryScreen2({route, navigation}) {
+function CatalogScreen({route, navigation}) {
     const {categoryName} = route.params;
-    console.log(categoryName);
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={style.container}>
             <FlatList
                 data={getDataByCategoryName({categoryName})}
                 renderItem={({item}) => renderItem({item, navigation})}
@@ -111,41 +107,4 @@ function CategoryScreen2({route, navigation}) {
     );
 }
 
-export default CategoryScreen2;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginTop: Constants.statusBarHeight,
-    },
-    priceText: {
-        fontSize: 14,
-        fontWeight: 'bold'
-    },
-    priceView: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingTop: 5
-    },
-    title: {
-        fontSize: 18,
-        color: '#63CBA7',
-        fontWeight: 'bold'
-    },
-    image: {
-        flex: 1,
-        width: null,
-        height: null,
-        resizeMode: 'contain'
-    },
-    imageContainer: {
-        width: wp('44%'),
-        height: wp('55%'),
-        marginBottom: 10
-    },
-    marginContainer: {
-        width: wp('44%'),
-        marginHorizontal: 10,
-        marginTop: 10
-    },
-});
+export default CatalogScreen;

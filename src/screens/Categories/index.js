@@ -1,6 +1,7 @@
-import * as React from 'react';
-import {FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import Constants from 'expo-constants';
+import React from 'react';
+import {FlatList, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+
+import style from './style.js';
 
 const CATEGORY_DATA = [
     {
@@ -13,12 +14,12 @@ const CATEGORY_DATA = [
     },
 ];
 
-function renderItem({item, navigation}) {
+function renderCategory({item, navigation}) {
     return (
-        <View style={styles.container}>
+        <View style={style.container}>
             <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Catalog', {categoryName: item.name})}>
                 <View style={{marginHorizontal: 5}}>
-                    <Text style={styles.title}>
+                    <Text style={style.title}>
                         {item.name}
                     </Text>
                 </View>
@@ -27,29 +28,16 @@ function renderItem({item, navigation}) {
     );
 }
 
-function WholeCategoryList({navigation}) {
+function Categories({navigation}) {
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={style.container}>
             <FlatList
                 data={CATEGORY_DATA}
-                renderItem={({item}) => renderItem({item, navigation})}
+                renderItem={({item}) => renderCategory({item, navigation})}
                 keyExtractor={item => item.id}
             />
         </SafeAreaView>
     );
 }
 
-export default WholeCategoryList;
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginTop: Constants.statusBarHeight,
-    },
-    title: {
-        fontSize: 18,
-        color: '#63CBA7',
-        fontWeight: 'bold'
-    },
-});
+export default Categories;

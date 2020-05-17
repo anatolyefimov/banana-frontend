@@ -1,11 +1,9 @@
-import * as React from 'react';
-import {Button, Dimensions, Image, ScrollView, Text, View} from 'react-native';
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import React from 'react';
+import {Button, Image, ScrollView, Text, View} from 'react-native';
 
-const {width} = Dimensions.get('window');
+import style from './style.js';
 
-function DetailsScreen({route, navigation}) {
-    /* 2. Get the param */
+function Details({route, navigation}) {
     const {itemId} = route.params;
     const {title} = route.params;
     const {price} = route.params;
@@ -14,31 +12,18 @@ function DetailsScreen({route, navigation}) {
     return (
         <View style={{flex: 1}}>
             <ScrollView>
-                <View
-                    style={{
-                        width: width,
-                        height: hp('65%')
-                    }}
-                >
-                    <Image
-                        source={{uri: image,}}
-                        style={{
-                            flex: 1,
-                            width: null,
-                            height: null,
-                            resizeMode: 'center'
-                        }}
-                    />
+                <View style={style.container_image}>
+                    <Image source={{uri: image}} style={style.image}/>
                 </View>
                 <Text>id: {itemId}</Text>
                 <Text>name: {title}</Text>
                 <Text>price: ${price}</Text>
                 <Text>image: {image}</Text>
-                <Button title="Go to list of categories" onPress={() => navigation.navigate('CategoriesList')}/>
+                <Button title="Go to list of categories" onPress={() => navigation.navigate('Categories')}/>
                 <Button title="Go back" onPress={() => navigation.goBack()}/>
             </ScrollView>
         </View>
     );
 }
 
-export default DetailsScreen;
+export default Details;
