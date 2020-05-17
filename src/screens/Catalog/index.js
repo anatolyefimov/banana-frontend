@@ -1,8 +1,7 @@
 import * as React from 'react';
-import {View, Text, FlatList, SafeAreaView, StyleSheet, TouchableOpacity, Button, Image} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {FlatList, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Constants from 'expo-constants';
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 
 const DATA = [
     {
@@ -26,23 +25,12 @@ const DATA = [
 ];
 
 function Item({item, navigation}) {
-    const {
-        containerStyle,
-        lastItemStyle,
-        imageStyle,
-        textStyle,
-        counterStyle,
-        priceStyle
-    } = styles;
 
     return (
-        <View style={containerStyle}>
-            <Image
-                style={imageStyle}
-                source={{uri: item.image}}
-            />
+        <View style={styles.container}>
             <TouchableOpacity
-                onPress={() => navigation.navigate('Details', //{id, title, price, navigation}
+                activeOpacity={0.8}
+                onPress={() => navigation.navigate('Details',
                     {
                         itemId: item.id,
                         title: item.title,
@@ -51,11 +39,60 @@ function Item({item, navigation}) {
                     }
                 )}
             >
-                {/*<Text style={styles.title}>{item.title}</Text>*/}
-                <View style={textStyle}>
-                    <Text style={{ color: '#2e2f30' }}>{item.title}</Text>
-                    <View style={priceStyle}>
-                        <Text style={{ color: '#2e2f30', fontSize: 12 }}>${item.price}</Text>
+                <View
+                    style={{
+                        width: wp('44%'),
+                        marginHorizontal: 10,
+                        marginTop: 10
+                    }}
+                >
+                    <View
+                        style={{
+                            width: wp('44%'),
+                            height: wp('55%'),
+                            marginBottom: 10
+                        }}
+                    >
+                        <Image
+                            source={{uri: item.image}}
+                            style={{
+                                flex: 1,
+                                width: null,
+                                height: null,
+                                resizeMode: 'contain'
+                            }}
+                        />
+                    </View>
+                    <View
+                        style={{
+                            marginHorizontal: 5
+                        }}
+                    >
+                        <Text
+                            style={{
+                                fontSize: 18,
+                                color: '#63CBA7',
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            {item.title}
+                        </Text>
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                paddingTop: 5
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    fontSize: 14,
+                                    fontWeight: 'bold'
+                                }}
+                            >
+                                ${item.price}
+                            </Text>
+                        </View>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -71,21 +108,6 @@ function rend_item({item, navigation}) {
 }
 
 function CategoryScreen2({navigation}) {
-    // return (
-    //     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    //         <Text>Home Screen</Text>
-    //         <Button
-    //             title="Go to Details"
-    //             onPress={() => {
-    //                 /* 1. Navigate to the Details route with params */
-    //                 navigation.navigate('Details', {
-    //                     itemId: 86,
-    //                     otherParam: 'anything you want here',
-    //                 });
-    //             }}
-    //         />
-    //     </View>
-    // );
     return (
         <SafeAreaView style={styles.container}>
             <FlatList
