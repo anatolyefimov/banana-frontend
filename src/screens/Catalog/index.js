@@ -24,86 +24,44 @@ const DATA = [
     },
 ];
 
-function Item({item, navigation}) {
+function Item({item, onPress}) {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => navigation.navigate('Details',
-                    {
-                        itemId: item.id,
-                        title: item.title,
-                        price: item.price,
-                        image: item.image,
-                    }
-                )}
-            >
-                <View
-                    style={{
-                        width: wp('44%'),
-                        marginHorizontal: 10,
-                        marginTop: 10
-                    }}
-                >
-                    <View
-                        style={{
-                            width: wp('44%'),
-                            height: wp('55%'),
-                            marginBottom: 10
-                        }}
-                    >
-                        <Image
-                            source={{uri: item.image}}
-                            style={{
-                                flex: 1,
-                                width: null,
-                                height: null,
-                                resizeMode: 'contain'
-                            }}
-                        />
+            <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+                <View style={styles.marginContainer}>
+                    <View style={styles.imageContainer}>
+                        <Image source={{uri: item.image}} style={styles.image}/>
                     </View>
-                    <View
-                        style={{
-                            marginHorizontal: 5
-                        }}
-                    >
-                        <Text
-                            style={{
-                                fontSize: 18,
-                                color: '#63CBA7',
-                                fontWeight: 'bold'
-                            }}
-                        >
+                    <View style={{marginHorizontal: 5}}>
+                        <Text style={styles.title}>
                             {item.title}
                         </Text>
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                paddingTop: 5
-                            }}
-                        >
-                            <Text
-                                style={{
-                                    fontSize: 14,
-                                    fontWeight: 'bold'
-                                }}
-                            >
+                        <View style={styles.priceView}>
+                            <Text style={styles.priceText}>
                                 ${item.price}
                             </Text>
                         </View>
                     </View>
                 </View>
             </TouchableOpacity>
-
         </View>
     );
 }
 
-function rend_item({item, navigation}) {
+function renderItem({item, navigation}) {
     return (
-        <Item item={item} navigation={navigation}/>
+        <Item
+            item={item}
+            navigation={navigation}
+            onPress={() => navigation.navigate('Details',
+                {
+                    itemId: item.id,
+                    title: item.title,
+                    price: item.price,
+                    image: item.image,
+                })}
+        />
     );
 }
 
@@ -112,7 +70,7 @@ function CategoryScreen2({navigation}) {
         <SafeAreaView style={styles.container}>
             <FlatList
                 data={DATA}
-                renderItem={({item}) => rend_item({item, navigation})}
+                renderItem={({item}) => renderItem({item, navigation})}
                 keyExtractor={item => item.id}
             />
         </SafeAreaView>
@@ -126,55 +84,34 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: Constants.statusBarHeight,
     },
-    item: {
-        backgroundColor: '#f9c2ff',
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
+    priceText: {
+        fontSize: 14,
+        fontWeight: 'bold'
+    },
+    priceView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingTop: 5
     },
     title: {
-        fontSize: 32,
+        fontSize: 18,
+        color: '#63CBA7',
+        fontWeight: 'bold'
     },
-    tinyLogo: {
-        width: 50,
-        height: 50,
-    },
-    containerStyle: {
-        flexDirection: 'row',
+    image: {
         flex: 1,
-        borderBottomWidth: 1,
-        borderColor: '#e2e2e2',
-        padding: 10,
-        paddingLeft: 15,
-        backgroundColor: '#fff'
+        width: null,
+        height: null,
+        resizeMode: 'contain'
     },
-    lastItemStyle: {
-        flexDirection: 'row',
-        flex: 1,
-        padding: 10,
-        paddingLeft: 15,
-        backgroundColor: '#fff'
+    imageContainer: {
+        width: wp('44%'),
+        height: wp('55%'),
+        marginBottom: 10
     },
-    imageStyle: {
-        width: 50,
-        height: 50,
-        marginRight: 20
+    marginContainer: {
+        width: wp('44%'),
+        marginHorizontal: 10,
+        marginTop: 10
     },
-    textStyle: {
-        flex: 2,
-        justifyContent: 'center'
-    },
-    priceStyle: {
-        backgroundColor: '#ddd',
-        width: 40,
-        alignItems: 'center',
-        marginTop: 3,
-        borderRadius: 3
-    },
-    counterStyle: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center'
-    }
 });
