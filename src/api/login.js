@@ -2,7 +2,7 @@ import Constants from 'expo-constants';
 
 async function login(data) {
     try {
-        let res = await fetch(`${Constants.manifest.extra.host}/login`, {
+        let res = await fetch(`${Constants.manifest.extra.banana_ip}/login`, {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
