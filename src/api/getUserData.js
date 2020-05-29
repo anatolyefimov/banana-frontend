@@ -1,7 +1,7 @@
 import Constants from 'expo-constants';
 
 async function getUserData(accessToken) {
-    let res = await fetch(`${Constants.manifest.extra.host}/get_user_data`, {
+    let res = await fetch(`${Constants.manifest.extra.banana_ip}/get_user_data`, {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
