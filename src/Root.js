@@ -12,8 +12,10 @@ import Registration from '@/screens/Registration';
 import Login from '@/screens/Login';
 import Loading from '@/screens/Loading';
 import MainScreen from '@/screens/Main';
-import Catalog from '@/screens/Catalog';
 import Basket from '@/screens/Basket';
+import CatalogScreen from './screens/Catalog';
+import Categories from './screens/Categories';
+import Details from './screens/Details';
 
 import {Ionicons} from '@expo/vector-icons';
 
@@ -54,6 +56,16 @@ function Root({dispatch, accessToken}) {
                     <Stack.Screen name="Login" component={Login}/>
                 )}
                 <Stack.Screen name="Registration" component={Registration}/>
+            </Stack.Navigator>
+        );
+    }
+
+    function Catalog() {
+        return (
+            <Stack.Navigator screenOptions={{headerShown: false}}>
+                <Stack.Screen name="Categories" component={Categories}/>
+                <Stack.Screen name="Catalog" component={CatalogScreen}/>
+                <Stack.Screen name="Details" component={Details}/>
             </Stack.Navigator>
         );
     }
