@@ -62,7 +62,7 @@ function Root({dispatch, accessToken}) {
 
     function Catalog() {
         return (
-            <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Navigator>
                 <Stack.Screen name="Categories" component={Categories}/>
                 <Stack.Screen name="Catalog" component={CatalogScreen}/>
                 <Stack.Screen name="Details" component={Details}/>
