@@ -13,11 +13,12 @@ import Login from '@/screens/Login';
 import Loading from '@/screens/Loading';
 import MainScreen from '@/screens/Main';
 import Basket from '@/screens/Basket';
-import CatalogScreen from './screens/Catalog';
-import Categories from './screens/Categories';
-import Details from './screens/Details';
+import CatalogScreen from '@/screens/Catalog';
+import Categories from '@/screens/Categories';
+import Details from '@/screens/Details';
+import BackImage from '@/components/BackImage'
 
-import {Ionicons} from '@expo/vector-icons';
+import {Ionicons } from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -62,9 +63,21 @@ function Root({dispatch, accessToken}) {
 
     function Catalog() {
         return (
-            <Stack.Navigator>
-                <Stack.Screen name="Categories" component={Categories}/>
-                <Stack.Screen name="Catalog" component={CatalogScreen}/>
+            <Stack.Navigator screenOptions={{
+                headerBackImage: () => <BackImage/>,
+                headerBackTitleVisible: false,
+                headerTitleAlign: 'left'
+            }}>
+                <Stack.Screen 
+                    name="Categories"
+                    component={Categories} 
+                    options={{ title: 'Категории'}}
+                />
+                <Stack.Screen 
+                    name="Catalog" 
+                    component={CatalogScreen}
+                    options={({ route }) => ({ title: route.params.categoryName })}
+                />
                 <Stack.Screen name="Details" component={Details}/>
             </Stack.Navigator>
         );

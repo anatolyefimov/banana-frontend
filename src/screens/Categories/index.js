@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlatList, SafeAreaView } from 'react-native';
 
-import Category from '@/components/Category'
+import Category from '@/components/Category';
 
 import style from './style.js';
 
@@ -18,7 +18,7 @@ const CATEGORY_DATA = [
         id: '2',
         title: 'Обувь',
     },
-    
+
 ];
 
 
@@ -27,9 +27,9 @@ export default function Categories({navigation}) {
         <SafeAreaView style={style.Categories}>
             <FlatList
                 data={CATEGORY_DATA}
-                renderItem={({ item }) => 
-                    <Category 
-                        title={ item.title } 
+                renderItem={({ item }) =>
+                    <Category
+                        title={ item.title }
                         onPress={() => navigation.navigate('Catalog', { categoryName: item.title })}
                     />
                 }

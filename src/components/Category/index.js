@@ -1,5 +1,5 @@
-import React from 'react'
-import { Text, TouchableOpacity, View, Systrace } from 'react-native';
+import React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
 
 import {Ionicons} from '@expo/vector-icons';
 
@@ -7,9 +7,9 @@ import style from './style.js';
 
 export default function Category({title, onPress}) {
     return (
-        <TouchableOpacity 
+        <TouchableOpacity
             style={style.Category}
-            activeOpacity={0.8} 
+            activeOpacity={0.8}
             onPress={onPress}
         >
             <Text style={style.Category__title}>

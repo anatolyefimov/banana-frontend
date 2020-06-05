@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, SafeAreaView, RecyclerViewBackedScrollViewComponent} from 'react-native';
+import {FlatList, SafeAreaView } from 'react-native';
 
 import Loading from '@/screens/Loading';
 import Product from '@/components/Product';
-import getCatalog from '@/api/getCatalog.js'
-
-import style from './style.js';
+import getCatalog from '@/api/getCatalog.js';
 
 
 function CatalogScreen({route, navigation}) {
@@ -15,22 +13,22 @@ function CatalogScreen({route, navigation}) {
     useEffect(() => {
         getCatalog(route.params.categoryName)
             .then((products) => {
-                setProducts(products)
+                setProducts(products);
                 setIsLoaded(true);
-            })
-    }, [])
-    console.log(isLoaded)
+            });
+    }, []);
+
     if (!isLoaded) {
-        return <Loading />
+        return <Loading />;
     }
 
     return (
         <SafeAreaView>
             <FlatList
                 data={products}
-                renderItem={({item}) => 
-                    <Product 
-                        data={{...item}} 
+                renderItem={({item}) =>
+                    <Product
+                        data={{...item}}
                         onPress={ () => navigation.navigate('Details', {...item}) }
                     />
                 }

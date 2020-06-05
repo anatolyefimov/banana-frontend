@@ -16,14 +16,14 @@ export default StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: 'tomato'
-    },  
-    
+    },
+
     Product__image: {
         width: '100%',
         height: 250,
         resizeMode: 'cover'
     },
-    
+
     Product__info: {
         paddingVertical: 10
     }

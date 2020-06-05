@@ -69,7 +69,7 @@ async function getCatalog(category) {
                 image: 'https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/7cb8836d6692428aae8cabaa00f7d76d_9366/Futbolka_Trefoil_Moskva_chernyj_GT7437_01_laydown.jpg',
             },
         ]
-    }
+    };
 
     return products[category];
 }
