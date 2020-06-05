@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import login from '@/api/login.js';
-import {setAccessToken} from '@/redux/actions';
 
 import style from './style.js';
 
@@ -28,7 +27,7 @@ function Login({ navigation, dispatch }) {
                 dispatch(setAccessToken(accessToken));
             }
             catch (e) {
-                console.log(e);
+                console.error(e);
             }
         } else {
             setCredentialsValid(false);
