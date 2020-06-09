@@ -7,7 +7,7 @@ import {Ionicons } from '@expo/vector-icons';
 
 
 import { setUserData, setAnonymousBasket } from '@/redux/actions';
-import fetchUserData from '@/api/fetchUserData.js'
+import fetchUserData from '@/api/fetchUserData.js';
 import User from '@/screens/User';
 import Registration from '@/screens/Registration';
 import Login from '@/screens/Login';
@@ -17,7 +17,7 @@ import Basket from '@/screens/Basket';
 import CatalogScreen from '@/screens/Catalog';
 import Categories from '@/screens/Categories';
 import Details from '@/screens/Details';
-import BackImage from '@/components/BackImage'
+import BackImage from '@/components/BackImage';
 
 
 const Stack = createStackNavigator();
@@ -33,8 +33,8 @@ function Root({ dispatch, isLoggedIn }) {
                 token = await AsyncStorage.getItem('accessToken');
                 // await AsyncStorage.clear()
                 anonymousBasket = await AsyncStorage.getItem('anonymousBasket');
-                anonymousBasket = JSON.parse(anonymousBasket)
-                anonymousBasket = anonymousBasket || {}
+                anonymousBasket = JSON.parse(anonymousBasket);
+                anonymousBasket = anonymousBasket || {};
             } catch (error) {
                 console.error(error);
             }
@@ -45,13 +45,13 @@ function Root({ dispatch, isLoggedIn }) {
                     userData = await fetchUserData(token);
                     userData.isLoggedIn = true;
                 }
-                catch(error) {
+                catch (error) {
                     console.error(error);
                 }
-              
-                dispatch(setUserData(userData))
+
+                dispatch(setUserData(userData));
             }
-            dispatch(setAnonymousBasket(anonymousBasket))
+            dispatch(setAnonymousBasket(anonymousBasket));
             setIsLoaded(true);
         };
 
@@ -83,13 +83,13 @@ function Root({ dispatch, isLoggedIn }) {
                 headerBackTitleVisible: false,
                 headerTitleAlign: 'left'
             }}>
-                <Stack.Screen 
+                <Stack.Screen
                     name="Categories"
-                    component={Categories} 
+                    component={Categories}
                     options={{ title: 'Категории'}}
                 />
-                <Stack.Screen 
-                    name="Catalog" 
+                <Stack.Screen
+                    name="Catalog"
                     component={CatalogScreen}
                     options={({ route }) => ({ title: route.params.categoryName })}
                 />
@@ -132,10 +132,6 @@ function Root({ dispatch, isLoggedIn }) {
     );
 
 }
-
-const mapStateToProps = (state) => ({
-    isLoggedIn : userData.isLoggedIn
-})
 
 export default connect()(Root);
 

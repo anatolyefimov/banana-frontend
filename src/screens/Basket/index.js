@@ -1,9 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import {View, Text, SafeAreaView} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-import style from './style.js'
+import style from './style.js';
 
 function Basket({basket}) {
 
@@ -26,13 +26,13 @@ function Basket({basket}) {
             </Text>
 
         </View>
-    )
-    
+    );
+
 
 }
 
 const mapStateToProps = (state) => ({
     basket: state.anonymousBasket
-})
+});
 
 export default connect(mapStateToProps)(Basket);

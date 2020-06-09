@@ -9,6 +9,5 @@ export const setUserData = (userData) => ({
 export const setAnonymousBasket = (anonymousBasket) => ({
     type: SET_ANONYMOUS_BASKET,
     anonymousBasket
-})
-
+});
 

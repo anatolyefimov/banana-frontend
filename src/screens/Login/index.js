@@ -9,7 +9,7 @@ import login from '@/api/login.js';
 
 import style from './style.js';
 
-function Login({ navigation, dispatch }) {
+function Login({ navigation }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [credentialsValid, setCredentialsValid] = useState(true);
@@ -24,7 +24,7 @@ function Login({ navigation, dispatch }) {
             setCredentialsValid(true);
             try {
                 await AsyncStorage.setItem('accessToken', accessToken);
-                dispatch(setAccessToken(accessToken));
+                // dispatch(setAccessToken(accessToken));
             }
             catch (e) {
                 console.error(e);
