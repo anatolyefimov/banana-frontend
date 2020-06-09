@@ -18,3 +18,4 @@ async function fetchUserData(accessToken) {
 }
 
 export default fetchUserData;
+    

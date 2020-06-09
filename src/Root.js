@@ -31,10 +31,14 @@ function Root({ dispatch, isLoggedIn }) {
             let anonymousBasket;
             try {
                 token = await AsyncStorage.getItem('accessToken');
+                // await AsyncStorage.clear()
                 anonymousBasket = await AsyncStorage.getItem('anonymousBasket');
+                anonymousBasket = JSON.parse(anonymousBasket)
+                anonymousBasket = anonymousBasket || {}
             } catch (error) {
                 console.error(error);
             }
+
             if (token) {
                 let userData;
                 try {
@@ -44,10 +48,10 @@ function Root({ dispatch, isLoggedIn }) {
                 catch(error) {
                     console.error(error);
                 }
-                dispatch(setAnonymousBasket(anonymousBasket))
+              
                 dispatch(setUserData(userData))
             }
-
+            dispatch(setAnonymousBasket(anonymousBasket))
             setIsLoaded(true);
         };
 

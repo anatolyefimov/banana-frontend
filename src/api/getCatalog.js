@@ -2,14 +2,14 @@ async function getCatalog(category) {
     let products = {
         'Брюки': [
             {
-                id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+                id: '00',
                 title: 'Брюки Abibas черные',
                 price: '4 500',
                 caregory: 'Брюки',
                 image: 'https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/98c3784fbc15490daf79a97600fd502f_9366/Bryuki_Firebird_chernyj_ED6897_21_model.jpg',
             },
             {
-                id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+                id: '01',
                 title: 'Брюки Abibas красные',
                 price: '4 999',
                 caregory: 'Брюки',
@@ -25,28 +25,28 @@ async function getCatalog(category) {
         ],
         'Обувь': [
             {
-                id: '0',
+                id: '10',
                 title: 'Кроссовик Abibas Gazzele бежевые',
                 price: '7 499',
                 caregory: 'Обувь',
                 image: 'https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/3b146027ef844e038d28ab0a00a69fbd_9366/Krossovki_Gazelle_zheltyj_EF5599_01_standard.jpg',
             },
             {
-                id: '1',
+                id: '11',
                 title: 'Кроссовик Abibas Gazzele чёрные',
                 price: '7 499',
                 caregory: 'Обувь',
                 image: 'https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/61f87dec481e4512823ea7fb0080ba1a_9366/Krossovki_Gazelle_chernyj_BB5476_01_standard.jpg'
             },
             {
-                id: '2',
+                id: '12',
                 title: 'Кроссовик Abibas Gazzele гейские',
                 price: '4 499',
                 caregory: 'Обувь',
                 image: 'https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/28e054c800ea44a4a8bea7fb007fc05d_9366/Krossovki_Gazelle_rozovyj_BB5472_01_standard.jpg',
             },
             {
-                id: '3',
+                id: '13',
                 title: 'Кроссовик Abibas Gazzele красные',
                 price: '4 499',
                 caregory: 'Обувь',
@@ -55,14 +55,14 @@ async function getCatalog(category) {
         ],
         'Рубашки': [
             {
-                id: '0',
+                id: '20',
                 title: 'Рубашка Abibas МОСКВА белая',
                 price: '2 999',
                 caregory: 'Рубашка',
                 image: 'https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/311e9515500441fe93cbabaa00f7d73d_9366/Futbolka_Trefoil_Moskva_belyj_GT7436_01_laydown.jpg',
             },
             {
-                id: '1',
+                id: '21',
                 title: 'Рубашка Abibas МОСКВА черная',
                 price: '2 999',
                 caregory: 'Рубашка',

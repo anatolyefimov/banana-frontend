@@ -1,12 +1,27 @@
 import React from 'react';
-import {Image, ScrollView, Text, SafeAreaView, View} from 'react-native';
+import {Image, ScrollView, Text, SafeAreaView, View, AsyncStorage} from 'react-native';
+import {connect} from 'react-redux';
 
+import {setAnonymousBasket} from '@/redux/actions';
 import Button from '@/components/Button'
 
 import style from './style.js';
 
-function Details({route, navigation}) {
-    const {itemId, title, price, image} = route.params;
+
+function Details({route, dispatch, basket}) {
+    const {id, title, price, image} = route.params;
+
+    async function addToBasket() {
+        console.log(id)
+        basket[id] = basket[id] + 1 || 1;
+        try {
+            await AsyncStorage.setItem('anonymousBasket', JSON.stringify(basket)); 
+            dispatch(setAnonymousBasket({...basket}))
+        }
+        catch(error) {
+            console.error(error)
+        }
+    }
 
     return (
         <ScrollView>
@@ -14,10 +29,15 @@ function Details({route, navigation}) {
                 <Image source={{uri: image}} style={style.Details__image} />
                 <Text style={style.Details__title}>{title}</Text>
                 <Text style={style.Details__price}>{price} ₽</Text>
-                <Button style={style.Details__toBasket} text='В корзину'/>
+                <Button style={style.Details__toBasket} onPress={addToBasket} text='В корзину'/>
             </View>
         </ScrollView>
     );
 }
 
-export default Details;
+
+const mapStateToProps = (state) => ({
+    basket: state.anonymousBasket
+})
+
+export default connect(mapStateToProps)(Details);
