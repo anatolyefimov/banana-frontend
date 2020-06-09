@@ -1,29 +1,43 @@
 import React from 'react';
-import {Button, Image, ScrollView, Text, View} from 'react-native';
+import {Image, ScrollView, Text,  View, AsyncStorage} from 'react-native';
+import {connect} from 'react-redux';
+
+import {setAnonymousBasket} from '@/redux/actions';
+import Button from '@/components/Button';
 
 import style from './style.js';
 
-function Details({route, navigation}) {
-    const {itemId} = route.params;
-    const {title} = route.params;
-    const {price} = route.params;
-    const {image} = route.params;
+
+function Details({route, dispatch, basket}) {
+    const {id, title, price, image} = route.params;
+
+    async function addToBasket() {
+        console.log(id);
+        basket[id] = basket[id] + 1 || 1;
+        try {
+            await AsyncStorage.setItem('anonymousBasket', JSON.stringify(basket));
+            dispatch(setAnonymousBasket({...basket}));
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
-        <View style={{flex: 1}}>
-            <ScrollView>
-                <View style={style.container_image}>
-                    <Image source={{uri: image}} style={style.image}/>
-                </View>
-                <Text>id: {itemId}</Text>
-                <Text>name: {title}</Text>
-                <Text>price: ${price}</Text>
-                <Text>image: {image}</Text>
-                <Button title="Go to list of categories" onPress={() => navigation.navigate('Categories')}/>
-                <Button title="Go back" onPress={() => navigation.goBack()}/>
-            </ScrollView>
-        </View>
+        <ScrollView>
+            <View style={style.Details}>
+                <Image source={{uri: image}} style={style.Details__image} />
+                <Text style={style.Details__title}>{title}</Text>
+                <Text style={style.Details__price}>{price} ₽</Text>
+                <Button style={style.Details__toBasket} onPress={addToBasket} text='В корзину'/>
+            </View>
+        </ScrollView>
     );
 }
 
-export default Details;
+
+const mapStateToProps = (state) => ({
+    basket: state.anonymousBasket
+});
+
+export default connect(mapStateToProps)(Details);

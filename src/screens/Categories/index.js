@@ -1,43 +1,41 @@
 import React from 'react';
-import {FlatList, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, SafeAreaView } from 'react-native';
+
+import Category from '@/components/Category';
 
 import style from './style.js';
 
 const CATEGORY_DATA = [
     {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        name: 'Брюки',
+        id: '0',
+        title: 'Брюки',
     },
     {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb2sba',
-        name: 'Футболки',
+        id: '1',
+        title: 'Рубашки',
     },
+    {
+        id: '2',
+        title: 'Обувь',
+    },
+
 ];
 
-function renderCategory({item, navigation}) {
-    return (
-        <View style={style.container}>
-            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Catalog', {categoryName: item.name})}>
-                <View style={{marginHorizontal: 5}}>
-                    <Text style={style.title}>
-                        {item.name}
-                    </Text>
-                </View>
-            </TouchableOpacity>
-        </View>
-    );
-}
 
-function Categories({navigation}) {
+export default function Categories({navigation}) {
     return (
-        <SafeAreaView style={style.container}>
+        <SafeAreaView style={style.Categories}>
             <FlatList
                 data={CATEGORY_DATA}
-                renderItem={({item}) => renderCategory({item, navigation})}
+                renderItem={({ item }) =>
+                    <Category
+                        title={ item.title }
+                        onPress={() => navigation.navigate('Catalog', { categoryName: item.title })}
+                    />
+                }
                 keyExtractor={item => item.id}
             />
         </SafeAreaView>
     );
 }
 
-export default Categories;

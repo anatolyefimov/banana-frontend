@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
-import accessToken from './accessToken.js';
 import userData from './userData.js';
+import anonymousBasket from './anonymousBasket.js';
 
 
 export default combineReducers({
-    accessToken,
-    userData
+    userData,
+    anonymousBasket
 });

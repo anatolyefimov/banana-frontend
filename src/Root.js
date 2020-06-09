@@ -1,47 +1,63 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import {AsyncStorage} from 'react-native';
+import {Ionicons } from '@expo/vector-icons';
 
-import {setAccessToken} from '@/redux/actions';
 
+import { setUserData, setAnonymousBasket } from '@/redux/actions';
+import fetchUserData from '@/api/fetchUserData.js';
 import User from '@/screens/User';
 import Registration from '@/screens/Registration';
 import Login from '@/screens/Login';
 import Loading from '@/screens/Loading';
 import MainScreen from '@/screens/Main';
 import Basket from '@/screens/Basket';
-import CatalogScreen from './screens/Catalog';
-import Categories from './screens/Categories';
-import Details from './screens/Details';
+import CatalogScreen from '@/screens/Catalog';
+import Categories from '@/screens/Categories';
+import Details from '@/screens/Details';
+import BackImage from '@/components/BackImage';
 
-import {Ionicons} from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function Root({dispatch, accessToken}) {
+function Root({ dispatch, isLoggedIn }) {
     const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
-        const fetchToken = async () => {
+        const fetchData = async () => {
             let token;
+            let anonymousBasket;
             try {
                 token = await AsyncStorage.getItem('accessToken');
+                // await AsyncStorage.clear()
+                anonymousBasket = await AsyncStorage.getItem('anonymousBasket');
+                anonymousBasket = JSON.parse(anonymousBasket);
+                anonymousBasket = anonymousBasket || {};
             } catch (error) {
                 console.error(error);
             }
-            if (accessToken === '') {
-                dispatch(setAccessToken(token));
-                setIsLoaded(true);
 
+            if (token) {
+                let userData;
+                try {
+                    userData = await fetchUserData(token);
+                    userData.isLoggedIn = true;
+                }
+                catch (error) {
+                    console.error(error);
+                }
+
+                dispatch(setUserData(userData));
             }
-
+            dispatch(setAnonymousBasket(anonymousBasket));
+            setIsLoaded(true);
         };
 
-        fetchToken();
-    });
+        fetchData();
+
+    }, []);
 
     if (!isLoaded) {
         return <Loading/>;
@@ -50,7 +66,7 @@ function Root({dispatch, accessToken}) {
     function Profile() {
         return (
             <Stack.Navigator screenOptions={{headerShown: false}}>
-                {accessToken ? (
+                {isLoggedIn ? (
                     <Stack.Screen name="User" component={User}/>
                 ) : (
                     <Stack.Screen name="Login" component={Login}/>
@@ -62,9 +78,21 @@ function Root({dispatch, accessToken}) {
 
     function Catalog() {
         return (
-            <Stack.Navigator screenOptions={{headerShown: false}}>
-                <Stack.Screen name="Categories" component={Categories}/>
-                <Stack.Screen name="Catalog" component={CatalogScreen}/>
+            <Stack.Navigator screenOptions={{
+                headerBackImage: () => <BackImage/>,
+                headerBackTitleVisible: false,
+                headerTitleAlign: 'left'
+            }}>
+                <Stack.Screen
+                    name="Categories"
+                    component={Categories}
+                    options={{ title: 'Категории'}}
+                />
+                <Stack.Screen
+                    name="Catalog"
+                    component={CatalogScreen}
+                    options={({ route }) => ({ title: route.params.categoryName })}
+                />
                 <Stack.Screen name="Details" component={Details}/>
             </Stack.Navigator>
         );
@@ -105,9 +133,5 @@ function Root({dispatch, accessToken}) {
 
 }
 
-const mapStateToProps = (state) => ({
-    accessToken: state.accessToken
-});
-
-export default connect(mapStateToProps)(Root);
+export default connect()(Root);
 

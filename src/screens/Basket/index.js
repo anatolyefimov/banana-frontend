@@ -1,17 +1,38 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import { connect } from 'react-redux';
+import {View, Text, SafeAreaView} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-function Basket() {
+import style from './style.js';
+
+function Basket({basket}) {
+
+    if (Object.keys(basket).length === 0) {
+        return (
+            <SafeAreaView style={style.EmptyBasket}>
+                <Ionicons name='md-basket' style={style.EmptyBasket__image} />
+                <Text style={style.EmptyBasket__text}>Корзина пуста</Text>
+            </SafeAreaView>
+        );
+    }
     return (
         <View style={{
             flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            alignItems: 'center'
         }}>
-            <Text>Корзина</Text>
-            <Text>тут будут выбранные товары и кнопка оплатить</Text>
+            <Text>
+                В корзине {Object.keys(basket).length} товаров.
+            </Text>
+
         </View>
     );
+
+
 }
 
-export default Basket;
+const mapStateToProps = (state) => ({
+    basket: state.anonymousBasket
+});
+
+export default connect(mapStateToProps)(Basket);

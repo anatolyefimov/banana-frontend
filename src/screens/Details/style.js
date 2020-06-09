@@ -1,18 +1,31 @@
 import {Dimensions, StyleSheet} from 'react-native';
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-const {width} = Dimensions.get('window');
 
 export default StyleSheet.create({
-    container_image: {
-        width: width,
-        height: hp('65%')
+    Details: {
+        padding: 20
     },
 
-    image: {
-        flex: 1,
-        width: null,
-        height: null,
-        resizeMode: 'center'
+    Details__image: {
+        width: '100%',
+        height: Dimensions.get('window').height * 0.7,
+        resizeMode: 'cover'
     },
+
+    Details__title: {
+        fontSize: 20,
+        paddingTop: 15
+    },
+
+    Details__price: {
+        fontSize: 20,
+        paddingTop: 15,
+        color: 'tomato'
+    },
+
+    Details__toBasket: {
+        marginTop: 20,
+        backgroundColor: 'tomato',
+        color: 'white'
+    }
 });
