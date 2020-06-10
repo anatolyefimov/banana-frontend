@@ -4,16 +4,23 @@ import {connect} from 'react-redux';
 
 import {setAnonymousBasket} from '@/redux/actions';
 import Button from '@/components/Button';
+import {FontAwesome5 } from '@expo/vector-icons';
+import BackImage from '@/components/BackImage'
 
 import style from './style.js';
 
 
-function Details({route, dispatch, basket}) {
+function Details({
+    route, 
+    dispatch, 
+    basket, 
+    navigation
+}) {
     const {id, title, price, image} = route.params;
-
     async function addToBasket() {
         console.log(id);
         basket[id] = basket[id] + 1 || 1;
+
         try {
             await AsyncStorage.setItem('anonymousBasket', JSON.stringify(basket));
             dispatch(setAnonymousBasket({...basket}));
@@ -21,6 +28,41 @@ function Details({route, dispatch, basket}) {
         catch (error) {
             console.error(error);
         }
+        
+        navigation.setOptions(({
+            title: 'Товар добавлен в корзину',
+            headerTintColor: 'white',
+            headerStyle: {
+                backgroundColor: 'limegreen',
+            },
+            headerTitleAlign: 'center',
+            headerBackImage: () => null,
+            headerRight: () => <FontAwesome5 
+                name='arrow-right' 
+                size={20}
+                color='white'
+                style={{
+                    paddingRight: 15
+                }}
+                onPress={ () => navigation.navigate('Корзина')}
+            />
+        }));
+
+        setTimeout(() => {
+            navigation.setOptions(({
+                title: 'Details',
+                headerTintColor: 'black',
+                headerStyle: {
+                    backgroundColor: 'white',
+                },
+                headerTitleAlign: 'left',
+                headerBackImage: () => <BackImage />,
+                headerRight: () => null
+                
+            }));
+    
+        }, 2000)
+        
     }
 
     return (
