@@ -13,7 +13,7 @@ import Registration from '@/screens/Registration';
 import Login from '@/screens/Login';
 import Loading from '@/screens/Loading';
 import MainScreen from '@/screens/Main';
-import Basket from '@/screens/Basket';
+import BasketScreen from '@/screens/Basket';
 import CatalogScreen from '@/screens/Catalog';
 import Categories from '@/screens/Categories';
 import Details from '@/screens/Details';
@@ -94,6 +94,19 @@ function Root({ dispatch, isLoggedIn }) {
                     options={({ route }) => ({ title: route.params.categoryName })}
                 />
                 <Stack.Screen name="Details" component={Details}/>
+            </Stack.Navigator>
+        );
+    }
+
+    function Basket() {
+        return (
+            <Stack.Navigator screenOptions={{
+                headerBackImage: () => <BackImage/>,
+                headerBackTitleVisible: false,
+                headerTitleAlign: 'left'
+            }}>
+                <Stack.Screen name="Basket" component={ BasketScreen }/>
+                <Stack.Screen name="Details" component={ Details }/>
             </Stack.Navigator>
         );
     }

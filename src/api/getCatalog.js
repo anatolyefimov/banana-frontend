@@ -16,7 +16,7 @@ async function getCatalog(category) {
                 image: 'https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/fbedf5c56f4f486291f2aac601173a5d_9366/Bryuki_Firebird_krasnyj_FM3814_21_model.jpg'
             },
             {
-                id: '58694a0f-3da1-471f-bd96-145571e29d72',
+                id: '02',
                 title: 'Брюки Abibas синие',
                 price: '4 999',
                 caregory: 'Брюки',
