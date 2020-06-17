@@ -8,6 +8,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: Constants.statusBarHeight,
+        padding: 10
     },
 
     EmptyBasket__image: {

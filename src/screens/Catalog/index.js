@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, SafeAreaView } from 'react-native';
+import {FlatList, SafeAreaView, Text } from 'react-native';
 
 import Loading from '@/screens/Loading';
 import Product from '@/components/Product';

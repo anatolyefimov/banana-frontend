@@ -6,7 +6,7 @@ export default function Button({style, text, onPress, ...props}) {
     return (
         <TouchableOpacity
             style={{
-                backgroundColor: 'blue',
+                backgroundColor: 'tomato',
                 padding: 10,
                 borderRadius: 5,
                 ...style

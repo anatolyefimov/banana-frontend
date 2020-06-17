@@ -13,7 +13,7 @@ import Registration from '@/screens/Registration';
 import Login from '@/screens/Login';
 import Loading from '@/screens/Loading';
 import MainScreen from '@/screens/Main';
-import BasketScreen from '@/screens/Basket';
+import Basket from '@/screens/Basket';
 import CatalogScreen from '@/screens/Catalog';
 import Categories from '@/screens/Categories';
 import Details from '@/screens/Details';
@@ -31,7 +31,7 @@ function Root({ dispatch, isLoggedIn }) {
             let anonymousBasket;
             try {
                 token = await AsyncStorage.getItem('accessToken');
-                // await AsyncStorage.clear()
+                await AsyncStorage.clear()
                 anonymousBasket = await AsyncStorage.getItem('anonymousBasket');
                 anonymousBasket = JSON.parse(anonymousBasket);
                 anonymousBasket = anonymousBasket || {};
@@ -97,20 +97,6 @@ function Root({ dispatch, isLoggedIn }) {
             </Stack.Navigator>
         );
     }
-
-    function Basket() {
-        return (
-            <Stack.Navigator screenOptions={{
-                headerBackImage: () => <BackImage/>,
-                headerBackTitleVisible: false,
-                headerTitleAlign: 'left'
-            }}>
-                <Stack.Screen name="Basket" component={ BasketScreen }/>
-                <Stack.Screen name="Details" component={ Details }/>
-            </Stack.Navigator>
-        );
-    }
-
 
     return (
         <Tab.Navigator
