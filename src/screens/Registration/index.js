@@ -48,7 +48,7 @@ export default function Registration({ navigation }) {
                             });
                     }}
                 />
-                <Text style = {{color: 'red'}}>{ !usernameTaken || 'This username already taken' }</Text>
+                <Text style = {{ color: 'red' }}>{ !usernameTaken || 'This username already taken' }</Text>
             </View>
             <Button
                 text = 'Go to the Login Page'

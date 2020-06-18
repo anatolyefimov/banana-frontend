@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, TouchableOpacity} from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
-export default function Button({style, text, onPress, ...props}) {
-    const textColor = style ? style.color : 'white';
+export default function Button({ style, text, onPress, ...props }) {
+
     return (
         <TouchableOpacity
             style={{
-                backgroundColor: 'blue',
+                backgroundColor: 'tomato',
                 padding: 10,
                 borderRadius: 5,
                 ...style
@@ -16,7 +16,7 @@ export default function Button({style, text, onPress, ...props}) {
         >
             <Text
                 style={{
-                    color: textColor,
+                    color: 'white',
                     fontSize: 20,
                     textAlign: 'center',
                 }}
