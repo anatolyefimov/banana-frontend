@@ -25,8 +25,7 @@ function Login({ navigation }) {
             try {
                 await AsyncStorage.setItem('accessToken', accessToken);
                 // dispatch(setAccessToken(accessToken));
-            }
-            catch (e) {
+            } catch (e) {
                 console.error(e);
             }
         } else {
@@ -60,7 +59,7 @@ function Login({ navigation }) {
                     style={style.form__button}
                     onPress={onSignIn}
                 />
-                <Text style = {{color: 'red'}}>{ credentialsValid || 'Invalid username or password' }</Text>
+                <Text style = {{ color: 'red' }}>{ credentialsValid || 'Invalid username or password' }</Text>
 
             </View>
             <Button

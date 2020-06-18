@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
-import {Ionicons} from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 import style from './style.js';
 
-export default function Category({title, onPress}) {
+export default function Category({ title, onPress }) {
     return (
         <TouchableOpacity
             style={style.Category}

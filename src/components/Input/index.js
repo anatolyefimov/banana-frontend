@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextInput } from 'react-native';
 
-export default function Input({value, style, onChangeText, ...props}) {
+export default function Input({ value, style, onChangeText, ...props }) {
     return (
         <TextInput
             value={value}

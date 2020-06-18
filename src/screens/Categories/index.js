@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, SafeAreaView } from 'react-native';
+import { FlatList, SafeAreaView } from 'react-native';
 
 import Category from '@/components/Category';
 
@@ -22,7 +22,7 @@ const CATEGORY_DATA = [
 ];
 
 
-export default function Categories({navigation}) {
+export default function Categories({ navigation }) {
     return (
         <SafeAreaView style={style.Categories}>
             <FlatList

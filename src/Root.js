@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {connect} from 'react-redux';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from '@react-navigation/stack';
-import {AsyncStorage} from 'react-native';
-import {Ionicons } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { AsyncStorage } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 
 import { setUserData, setAnonymousBasket } from '@/redux/actions';
@@ -31,7 +31,7 @@ function Root({ dispatch, isLoggedIn }) {
             let anonymousBasket;
             try {
                 token = await AsyncStorage.getItem('accessToken');
-                await AsyncStorage.clear()
+                await AsyncStorage.clear();
                 anonymousBasket = await AsyncStorage.getItem('anonymousBasket');
                 anonymousBasket = JSON.parse(anonymousBasket);
                 anonymousBasket = anonymousBasket || {};
@@ -44,8 +44,7 @@ function Root({ dispatch, isLoggedIn }) {
                 try {
                     userData = await fetchUserData(token);
                     userData.isLoggedIn = true;
-                }
-                catch (error) {
+                } catch (error) {
                     console.error(error);
                 }
 
@@ -65,7 +64,7 @@ function Root({ dispatch, isLoggedIn }) {
 
     function Profile() {
         return (
-            <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
                 {isLoggedIn ? (
                     <Stack.Screen name="User" component={User}/>
                 ) : (
@@ -86,7 +85,7 @@ function Root({ dispatch, isLoggedIn }) {
                 <Stack.Screen
                     name="Categories"
                     component={Categories}
-                    options={{ title: 'Категории'}}
+                    options={{ title: 'Категории' }}
                 />
                 <Stack.Screen
                     name="Catalog"
@@ -100,9 +99,9 @@ function Root({ dispatch, isLoggedIn }) {
 
     return (
         <Tab.Navigator
-            screenOptions={({route}) => ({
+            screenOptions={({ route }) => ({
 
-                tabBarIcon: ({color, size}) => {
+                tabBarIcon: ({ color, size }) => {
                     let iconName;
 
                     if (route.name === 'Главная') {

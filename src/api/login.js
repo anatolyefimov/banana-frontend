@@ -14,8 +14,7 @@ async function login(data) {
         res = await res.json();
 
         return res.access_token;
-    }
-    catch (e) {
+    } catch (e) {
         console.error(e);
     }
 

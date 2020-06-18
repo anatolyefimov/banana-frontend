@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 
 export default function BackImage() {

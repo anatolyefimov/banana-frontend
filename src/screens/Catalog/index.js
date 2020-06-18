@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {FlatList, SafeAreaView, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { FlatList, SafeAreaView } from 'react-native';
 
 import Loading from '@/screens/Loading';
 import Product from '@/components/Product';
 import getCatalog from '@/api/getCatalog.js';
 
 
-function CatalogScreen({route, navigation}) {
+function CatalogScreen({ route, navigation }) {
     const [isLoaded, setIsLoaded] = useState(false);
     const [products, setProducts] = useState([]);
 
@@ -26,10 +26,10 @@ function CatalogScreen({route, navigation}) {
         <SafeAreaView>
             <FlatList
                 data={products}
-                renderItem={({item}) =>
+                renderItem={({ item }) =>
                     <Product
-                        data={{...item}}
-                        onPress={ () => navigation.navigate('Details', {...item}) }
+                        data={{ ...item }}
+                        onPress={ () => navigation.navigate('Details', { ...item }) }
                     />
                 }
                 keyExtractor={item => item.id}
